@@ -1,0 +1,81 @@
+{% load static %}
+{% load socialaccount %}
+<html>
+    <head> 
+        <title>HomePage</title> 
+        <meta charset="utf-8"> 
+        <meta name="viewport" 
+      content="width=device-width, initial-scale=1"> 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> 
+        <script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"> 
+      </script> 
+        <script src= "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"> 
+          
+        </script> 
+      </head> 
+      <body> 
+        <nav class="navbar navbar-light" style="background-color: #00cccc;"> 
+        <div class="container-fluid"> 
+          <div class="navbar-header"> 
+              <a class="navbar-brand" color=""href="#" > IBS SOFTWARE</a>  
+          </div> 
+          <!-- <ul class="nav navbar-nav"> 
+           <li class="active"><a href="#">Home</a></li> 
+           <li><a href="#">About</a></li> 
+           <li><a href="#">Careers</a></li> 
+          </ul>  -->
+        </div>
+        <div text-align="right">
+          <button type="button" class="btn btn-secondary"> <a href="review">Review</a></button>
+          {% if user.is_authenticated %}
+          <div class="btn-group">
+            <button class="btn btn-info btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Welcome, {{ user.username }} !
+            </button>
+
+             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
+        <a class="dropdown-item" href="/admin">ADMIN</a>
+        <a class="dropdown-item" href="logout">Logout</a>
+        
+      </div>
+    </div>
+    {% endif%}     
+  </div>
+</nav> 
+        
+          <div class="container">
+            <h4 style="color:#00cccc;"><b>OUR CUSTOMERS</b></h4>
+            <h2 style="color:#00264d" ><b>Partnering for transformation</b></h2><br>
+            <div class="row">
+              <div class="col-lg-6">
+                    <p><h4>Our relationship with customers transcends contractual commitments.<br>
+                      What starts out as a transactional relationship quickly becomes a <br>
+                      strategic one. They see in IBS a reliable and longstanding partner critical<br>
+                      in realising business goals. Which is why we have never failed to do <br>
+                      more business with our existing customers. <br><br><br>
+                 <b>Given below is a partial list of our 170 + customers</b><br><br>
+                    </h4></p>
+              </div>
+                <div class="col-lg-6">
+                    <img src="/static/images/customers.jpg" width="100%">
+                </div>
+            </div>
+          </div><br><br> 
+          
+          
+          
+            <div class="container">
+              <div class="row">
+                {% for cust in custs %}
+                <div class="col-sm-4" text-align="center">
+                  <img src="{{cust.img.url}}" style="width: 200px;"><br>
+                  <button type="button"  onclick="window.location.href= '{{cust.id}}/'" class="btn btn-danger" >More Info</button>
+                </div>
+                {% endfor%}
+                
+              </div>
+            </div>
+            <iframe allow="microphone;" width="350" height="430" src="https://console.dialogflow.com/api-client/demo/embedded/d1990ca9-b8fe-4a6a-bc0d-7d2cb1efced2"></iframe>
+      
+      </body>
+</html>
