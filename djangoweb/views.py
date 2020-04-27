@@ -102,7 +102,6 @@ def chat(request):
 
     api = tweepy.API(auth)
 
-
     for names in custs:
         polarity = 0
         subjectivity = 0
@@ -117,7 +116,4 @@ def chat(request):
             names.pol = polarity
             names.sub = subjectivity
             names.save()
-
-
-
     return render(request,'chat.html',{'custs':custs})        
