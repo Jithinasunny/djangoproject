@@ -29,6 +29,23 @@ def login(request):
 
     else:
         return render(request,'login.html')
+
+# def login(request):
+#     if request.method=='POST': 
+#         username=request.POST['username']
+#         password=request.POST['password']
+
+#         user=auth.authenticate(username=username,password=password)
+
+#         if user is not None:
+#             auth.login(request,user)
+#             return redirect('home')
+#         else:
+#             messages.error(request,'invalid credentials')
+#             return redirect('login')  
+#     else:         
+#         return render(request,'login.html')
+
         
 
 def register(request):
@@ -75,25 +92,29 @@ def customers(request,id):
             if block == None:
                 pass
             else:
-                txt = txt+(str(paragraph.text))
+                txt +=(str(paragraph.text))
 
         custids.desc =txt
         custids.save()
     return render(request,'info.html',{"custids":custids})
 
 def home(request):
-
     custs = Customer.objects.all()
     return render(request,'home.html',{'custs':custs})
 
+
 def logout(request):
     auth.logout(request)
-    return redirect('/')
+    return render(request,'login.html')
+    # return redirect('/')
+
+
 def chat(request):
     custs = Customer.objects.all()
 
     consumer_key = 'q3NopxIzKRa7cXvPGXCInkFee'
     consumer_secret = 'TcvYUi4oIiDOonBO0crCoy4D3UjdjHpY0r8cjSpnZyMl6UP4H8'
+
     access_token = '1254647674160078848-32NJL0yJcmKx3y9n8eQht0d7pUtzNt'
     access_token_secret = 'zsVUrFkxLqMGABg1VopYqKKEdThb25tNaNXYprPx9ewuh'
 
@@ -116,4 +137,5 @@ def chat(request):
             names.pol = polarity
             names.sub = subjectivity
             names.save()
+
     return render(request,'chat.html',{'custs':custs})        
